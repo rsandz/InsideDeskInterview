@@ -1,0 +1,16 @@
+{
+  "name": "insidedesk-interview-ryan",
+  "version": "1.0.0",
+  "description": "InsideDesk Interview Task\r =========================",
+  "main": "main.js",
+  "dependencies": {
+    "puppeteer": "^7.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ryan Sandoval",
+  "license": "ISC",
+  "type": "module"
+}
