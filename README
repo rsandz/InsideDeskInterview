@@ -4,6 +4,20 @@ InsideDesk Interview Task
 Name: Ryan Sandoval
 Task: WebScrapper
 
+Testing
+=======
+
+The main application is not yet implemented. Instead, use:
+```
+$ node webscraper.js
+```
+
+Notes
+=====
+
+A function to workaround the CATCHPA has been implemented in webscraper.js
+It simply reloads the page until the CATCHPA disappears.
+
 Dependencies
 ============
 - Puppeteer
