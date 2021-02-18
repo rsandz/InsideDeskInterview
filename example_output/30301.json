@@ -1,0 +1,194 @@
+[
+    {
+        "name": "Dr. Carrie K Logue",
+        "info": {
+            "phone": "(770) 424-1705",
+            "address": " 2430 Powell Place NW Kennesaw, GA 30144 ",
+            "gender": " Female ",
+            "specialties": " General Practice ",
+            "education": " Georgia Regents University "
+        }
+    },
+    {
+        "name": "Julie Tanner",
+        "info": {
+            "phone": "(770) 973-8911",
+            "website": "www.ytdentistry.com",
+            "address": " 1000 Johnson Ferry Rd Ste A100 Marietta, GA 30068-2110 ",
+            "gender": " Female ",
+            "specialties": " General Practice ",
+            "language": " Spanish ",
+            "education": " Georgia Regents University "
+        }
+    },
+    {
+        "name": "Harmony Francis",
+        "info": {
+            "phone": "(678) 331-1533",
+            "address": " 2511 Canton Rd Marietta, GA 30066-5374 ",
+            "gender": " Female ",
+            "specialties": " General Practice ",
+            "education": " MA-Tufts University School of Dental Medicine  Tufts University School of Dental Medicine "
+        }
+    },
+    {
+        "name": "Dr. Imad Sabbagh",
+        "info": {
+            "phone": "(678) 387-2783",
+            "email": "Send email",
+            "website": "www.mainstreetdentistry.com",
+            "address": " 366 N Main St Ste 400 Alpharetta, GA 30009-8383 ",
+            "payment options": " Accepts in-network insurance, Cash/Check, Credit/Debit Card, Financing ",
+            "insurance": " UnitedHealthcare Dental, Humana Insurance Company, Delta Dental , Blue Cross Blue Shield, Ameritas Life Insurance Corp., Aetna Dental, Guardian, United Concordia Companies, Inc., United Healthcare, Humana, Cigna ",
+            "gender": " Male ",
+            "specialties": " General Practice ",
+            "language": " English ",
+            "education": " University of Tennessee HSC College of Dentistry ",
+            "practice description": " Main Street Dentistry is Alpharetta’s leading dental  practice. Patients visit our office to get the highest quality dental care for a wide array of issues, including preventative, restorative and cosmetic care. In practice for over 15 years, we’ve earned a reputation as one of Georgia’s premier general and cosmetic dental clinics. "
+        }
+    },
+    {
+        "name": "Dr. Elise Ashpole",
+        "info": {
+            "address": " 1775 Clairmont Rd Decatur, GA 30033 ",
+            "gender": " Female ",
+            "specialties": " General Practice ",
+            "education": " University of Louisville "
+        }
+    },
+    {
+        "name": "Dr. Marcos H Caceres",
+        "info": {
+            "phone": "(770) 943-3344",
+            "website": "www.brightandhealthysmiles.com",
+            "address": " 3451 Ernest W Barrett Pkwy NW Ste 190 Marietta, GA 30064 ",
+            "gender": " Male ",
+            "specialties": " General Practice ",
+            "education": " Georgia Regents University "
+        }
+    },
+    {
+        "name": "Dr. Zachary A Rifkin",
+        "info": {
+            "phone": "(770) 393-0800",
+            "email": "Send email",
+            "website": "allsmilesdds.com",
+            "address": " 1000 Abernathy Rd Ste 300 Atlanta, GA 30328-5606 ",
+            "gender": " Male ",
+            "specialties": " General Practice ",
+            "education": " NY-NYU Langone Medical Center/Reconstructive Plastic Surgery  University at Buffalo, The State University of New York "
+        }
+    },
+    {
+        "name": "Dr. Maria Cristina Everson",
+        "info": {
+            "phone": "(404) 697-7497",
+            "email": "Send email",
+            "website": "buckheadorthodontics.com",
+            "address": " 2385 Peachtree Rd NE Ste A3EF Atlanta, GA 30305-4140 ",
+            "gender": " Female ",
+            "specialties": " General Practice ",
+            "language": " English, Filipino, Spanish ",
+            "education": " University of Illinois at Chicago ",
+            "practice description": " Orthodontics "
+        }
+    },
+    {
+        "name": "Dr. Ronald E Goldstein",
+        "info": {
+            "phone": "(404) 261-4941",
+            "email": "Send email",
+            "website": "www.goldsteingarber.com",
+            "address": " 600 Galleria Pkwy SE Ste 800 Atlanta, GA 30339-5992 ",
+            "payment options": " Credit/Debit Card ",
+            "gender": " Male ",
+            "specialties": " General Practice ",
+            "language": " Afrikaans, Arabic, Egyptian, Farsi, German, Portuguese, Spanish, Latin ",
+            "education": " Emory University School of Medicine ",
+            "practice description": " A Multi-disciplinary esthetic and implant based practice with specialists in orthodontics, periodontics, prosthodontics, and oral surgery.  We are experts in esthetic/cosmetic and restorative dentistry, including veneers, bonding, sleep apnea therapy. "
+        }
+    },
+    {
+        "name": "Dr. David G Hochberg",
+        "info": {
+            "phone": "(404) 874-6464",
+            "email": "Send email",
+            "website": "www.colonysquaredental.com",
+            "address": " 1175 Peachtree St NE - Suite 1210 Atlanta, GA 30361-6213 ",
+            "payment options": " Cash/Check, Credit/Debit Card, Financing, Out-of-network, files claim, CareCredit ",
+            "insurance": " Delta Dental , Aetna Dental, United Concordia Companies, Inc., United Healthcare, Cigna, GEHA, Blue Cross Blue Shield, Guardian, Humana ",
+            "gender": " Male ",
+            "specialties": " General Practice ",
+            "language": " English ",
+            "education": " Emory University School of Medicine ",
+            "practice description": " Dr. Hochberg offers general & cosmetic dentistry including dental implants, teeth whitening, crowns, bridges, fillings, porcelain veneers & sedation dentistry.   "
+        }
+    },
+    {
+        "name": "Dr. Sidney Abrams",
+        "info": {
+            "phone": "(404) 633-5000",
+            "address": " 2531 Briarcliff Rd NE Ste 113 Atlanta, GA 30329-3017 ",
+            "gender": " Male ",
+            "specialties": " General Practice ",
+            "education": " Northwestern University "
+        }
+    },
+    {
+        "name": "Dr. Neal N Shah",
+        "info": {
+            "phone": "(404) 892-2097",
+            "email": "Send email",
+            "website": "www.atlantadentistmidtown.com",
+            "address": " 1175 Peachtree St NE Ste 1204 Atlanta, GA 30361-3544 ",
+            "payment options": " Accepts in-network insurance, Credit/Debit Card, Financing ",
+            "insurance": " Delta Dental  ",
+            "gender": " Male ",
+            "specialties": " General Practice ",
+            "language": " English, Gujarati ",
+            "education": " Georgia Regents University ",
+            "practice description": " Neal N. Shah, works with patients of all ages, and performs a variety of procedures including restorative, endodontic, and oral surgery.  "
+        }
+    },
+    {
+        "name": "Dr. John E Robinson",
+        "info": {
+            "phone": "(770) 939-7167",
+            "email": "Send email",
+            "website": "www.embryhillsdentalcare.com",
+            "address": " 2855 Henderson Mill Rd Atlanta, GA 30341 ",
+            "gender": " Male ",
+            "specialties": " General Practice ",
+            "language": " English ",
+            "education": " Georgia Regents University "
+        }
+    },
+    {
+        "name": "Dr. Ayesha Rahman",
+        "info": {
+            "phone": "(404) 229-8382",
+            "email": "Send email",
+            "website": "www.rahmandentistry.org",
+            "address": " 2018 Montreal Rd Tucker, GA 30084-5203 ",
+            "payment options": " Accepts in-network insurance, CareCredit, Credit/Debit Card, Cash/Check, Out-of-network, does not file claim ",
+            "insurance": " Delta Dental , Blue Cross Blue Shield, Anthem Blue Cross Blue Shield, Aetna Dental, Principal, Guardian, United Healthcare, Humana, Cigna, MetLife, Ameritas Life Insurance Corp. ",
+            "gender": " Female ",
+            "specialties": " General Practice ",
+            "language": " Spanish, Hindi, Punjabi, Urdu, English, Afrikaans, Bengali, Gujarati, Indian ",
+            "education": " Boston University ",
+            "practice description": " We are a general dentistry office and we pride ourselves at treating our patients with the utmost care.\rWe are equipped with the latest technology,we stay on top of our field with continuing education. We offer a wide array of services from teeth cleaning & whitening, teeth alignment, fillings & crowns, dental implants, extractions. Geriatrics and pedo! "
+        }
+    },
+    {
+        "name": "Dr. James C Kincaid",
+        "info": {
+            "phone": "(404) 261-0551",
+            "email": "Send email",
+            "website": "www.drjameskincaid.com",
+            "address": " 3580 Piedmont Rd Ne Ste 107 Atlanta, GA 30305-1506 ",
+            "gender": " Male ",
+            "specialties": " General Practice ",
+            "education": " Emory University School of Medicine "
+        }
+    }
+]

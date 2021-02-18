@@ -4,6 +4,7 @@
   "description": "InsideDesk Interview Task\r =========================",
   "main": "main.js",
   "dependencies": {
+    "commander": "^7.1.0",
     "puppeteer": "^7.1.0"
   },
   "devDependencies": {},
