@@ -1,6 +1,6 @@
 import { exit } from "process";
 import puppeteer from "puppeteer";
-import { SITE_URL } from "./constants.js";
+import { SITE_URL, TIMEOUT } from "./constants.js";
 import { Dentist } from "./models/dentist.js"
 
 /**
@@ -9,15 +9,35 @@ import { Dentist } from "./models/dentist.js"
  */
 async function catchpaWorkAround(page) {
     while ((await page.$(".high-traffic-captcha-container")) != null) {
-        await page.reload({waitUntil : "networkidle0"});
+        console.warn("Detected captcha. Waiting and realoading...");
+        await page.reload();
+        await sleep(TIMEOUT);
     }
 }
 
+/**
+ * Make a page go to a url, but timeout before returning.
+ * @param {puppeteer.Page} page The page to invoke goto on
+ * @param {String} url The url to goto>
+ */
+async function throttledGoTo(page, url) {
+        await page.goto(url);
+        await sleep(TIMEOUT);
+        await catchpaWorkAround(page);
+}
+
+/**
+ * Pause execution for a certain amount of time.
+ * @param {number} t Timeout
+ */
+function sleep(t) {
+    return new Promise(resolve => setTimeout(resolve, t));
+}
 
 /**
  * Web Scraper for the ADA Dentist finder.
  */
-class FindADentistScraper {
+export class FindADentistScraper {
     constructor(zipCode) {
         this.zipCode = zipCode;
         this.browser = null;
@@ -32,12 +52,9 @@ class FindADentistScraper {
     async scrape() {
         this.browser = await puppeteer.launch({"headless" : false});
         this.page = await this.browser.newPage();
-        await this.page.goto(SITE_URL, { waitUntil : "networkidle0" });
-        await catchpaWorkAround(this.page);
+        await throttledGoTo(this.page, SITE_URL);
 
         await this.enterZipCode();
-        await this.page.waitForNavigation({waitUntil : "networkidle0"});
-        await catchpaWorkAround(this.page);
 
         // Wait until loading list done
         await this.page.waitForSelector(".dentist-list__item a");
@@ -87,6 +104,8 @@ class FindADentistScraper {
         );
 
         await submitBtnEl.click()
+        await sleep(TIMEOUT);
+        await catchpaWorkAround(this.page);
     }
 
     /**
@@ -100,15 +119,18 @@ class FindADentistScraper {
         var dentistList = await this.page.$$(".dentist-list__item h2 > a");
         var dentistLinksPromises = dentistList.map(item => item.getProperty("href"));
         
-        // Crawl each dentist link asynchronously
-        var dentistCrawlPromises = dentistLinksPromises.map(async promise => {
-            let dentist_link = await (await promise).jsonValue();
-            return this.crawlDentistLink(dentist_link);
-        })
-
-        await Promise.all(dentistCrawlPromises).catch(err => {
-            console.log("Could not crawl a page:\n %s", err);
-        }); // Wait till all dentists crawled
+        // Crawl each dentist link synchronously
+        for (let promise of dentistLinksPromises) {
+            let  dentistLink = await (await promise).jsonValue();;
+            try {
+                await this.crawlDentist(dentistLink)
+            }
+            catch (err) {
+                console.error("Could not crawl %s", dentistLink);
+                console.error(err);
+                continue; // No need to bail if something goes wrong for one.
+            }
+        }
 
         console.log(this.result);
     }
@@ -118,33 +140,63 @@ class FindADentistScraper {
      * Each link is crawled in a new page.
      * @param {String} link The url for a specific dentist.
      */
-    async crawlDentistLink(link) {
-        const localPage = await this.browser.newPage();
-        await localPage.goto(link, {
-            waitUntil : "networkidle0"
-        });
-        await catchpaWorkAround(localPage);
-
-        const localDentist = new Dentist();
+    async crawlDentist(link) {
+        await throttledGoTo(this.page, link);
+        const dentist = new Dentist();
 
         // Most of the fields are available via definition lists (dl).
         // With exception to name.
-        localDentist.name = await localPage.$eval("div.name > h1", el => el.textContent);
+        dentist.name = await this.page.$eval("div.name > h1", el => el.textContent);
 
-        // Get the dt and dd fields
+        // Get the dl lists that describe dentist, except for hours
+        var dlList = await this.page.$$(
+            "section.dentist-details :not(.dentist-details__open-hours) > dl");
+        var dlMapPromises = [];
 
-        await localPage.close();
+        for (let dl of dlList) {
+            dlMapPromises.push(this.crawlDefinitionList(dl));
+        }
 
-        this.result.push(localDentist);
+        // Aggregate all values in dentist info prop.
+        var dlMaps = await Promise.all(dlMapPromises);
+        var mergedMaps = dlMaps.reduce(
+            (prev, curr) => new Map([...prev, ...curr]), new Map());
+        dentist.info = Object.fromEntries(mergedMaps);
+
+        this.result.push(dentist);
+    }
+
+    /**
+     * Parses a definition list into an array of maps
+     * @param {puppeteer.ElementHandle} dl The element handle for definition list
+     * @returns {Promise<Map<String, String>>} Map of info field and info data.
+     */
+    async crawlDefinitionList(dl) {
+        var map = new Map();
+        
+        var dt = null;
+        var dd = null;
+        var index = 1; // We start at 1 index for CSS selectors
+
+        // Parse through all dt and dd pairs until one becomes null.
+        while (true) {
+            dt = await dl.$(`dt:nth-of-type(${index})`);
+            dd = await dl.$(`dd:nth-of-type(${index})`);
+
+            if (dd != null && dt != null) {
+                map.set(
+                    (await dt.evaluate(e => e.textContent)).trim().toLowerCase(), 
+                    await dd.evaluate(e => e.textContent)
+                );
+            }
+            else {
+                break;
+            }
+
+            index++; 
+        }
+
+        return map;
     }
 
 }
-
-// For Testing purposes
-(async () => {
-    let scraper = new FindADentistScraper("39901");
-    scraper.scrape().catch(err => {
-        console.log(err);
-        exit(-1);
-    });
-})()
