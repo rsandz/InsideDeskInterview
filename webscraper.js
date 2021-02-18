@@ -34,14 +34,19 @@ function sleep(t) {
     return new Promise(resolve => setTimeout(resolve, t));
 }
 
-/**
- * Web Scraper for the ADA Dentist finder.
- */
 export class FindADentistScraper {
-    constructor(zipCode) {
+
+    /**
+     * Web Scraper for the ADA Dentist finder.
+     * @param {String} zipCode Zip code to crawl
+     * @param {puppeteer.Browser} browser Browser instance to use in crawl
+     * @param {String} specialty The specialty filterA
+     */
+    constructor(zipCode, browser, specialty="General Practice") {
         this.zipCode = zipCode;
-        this.browser = null;
-        this.page = null;
+        this.specialty = specialty;
+        this.browser = browser;
+        this.page = null; 
 
         this.result = [];
     }
@@ -50,21 +55,20 @@ export class FindADentistScraper {
      * Scrape the results of the provided zip code.
      */
     async scrape() {
-        this.browser = await puppeteer.launch({"headless" : false});
         this.page = await this.browser.newPage();
         await throttledGoTo(this.page, SITE_URL);
 
+        await this.selectSpecialty();
         await this.enterZipCode();
 
         // Wait until loading list done
         await this.page.waitForSelector(".dentist-list__item a");
 
         console.log("Dentist list gotten");
-        this.crawlDentistList();
+        await this.crawlDentistList();
 
-        await this.page.screenshot({ path: 'example.png' });
-
-        // await this.browser.close();
+        this.page.close();
+        return this.result;
     }
 
     /**
@@ -109,6 +113,29 @@ export class FindADentistScraper {
     }
 
     /**
+     * Sets the sepcialty when searching for dentists.
+     */
+    async selectSpecialty() {
+        var selectBox = await this.page.$("[formcontrolname='specialty'] > div");
+        await selectBox.click(); // Open the selection box
+
+        // Select options now available. Find them.
+        var selectBoxOptions = await selectBox.$$(".ng-option .ng-option-label")
+
+        // Go through each option until we find our specialty.
+        for (let option of selectBoxOptions) {
+            let optionText = await option.evaluate(e => e.textContent);
+            if (optionText == this.specialty) {
+                // We want to select this specialty
+                await option.click();
+                return;
+            }
+        }
+
+        console.error("Could not find specified specialty. Skipping");
+    }
+
+    /**
      * Crawl page for a zip code search result that provides a list of
      * dentists.
      */
@@ -131,8 +158,6 @@ export class FindADentistScraper {
                 continue; // No need to bail if something goes wrong for one.
             }
         }
-
-        console.log(this.result);
     }
 
     /**
